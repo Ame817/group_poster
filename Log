@@ -1,0 +1,8 @@
+2025-4-11 Chenzi:
+  1.create file : cDNA_stability_CG.py
+  2.add function:
+     change mRNA into cDNA
+     moving average (not test yet)
+  3.need to add:
+     check mRNA
+     visualization
