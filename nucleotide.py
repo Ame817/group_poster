@@ -11,7 +11,9 @@ codon_list=[a+b+c for a in bases for b in bases for c in bases]
 gene_sequence='AUGUAUUAUUAUUAUACUACUUCAAUCUCGUCGUAGUAGCGUCGUUAGUAGUAUUAUUAUUAUUAAACUACUACUACUACUACU'
 terminal=['UAA','UAG','UGA']
 codon_dict={}
-codon_dict.setdefault(codon_list,0) #ERROR: Unhashable type: 'list' (Lists cannot be used as keys)
+for codons in codon_list:
+    codon_dict.setdefault(codons,0) 
+
 i=0
 while i>=0:
     codon=gene_sequence[3*i:3*i+3] 
@@ -45,4 +47,5 @@ aa_dict['Valine'] = codon_dict['GUA'] + codon_dict['GUC'] + codon_dict['GUU'] + 
 aa_dict['Tryptophan'] = codon_dict['UGG']
 aa_dict['Tyrosine'] = codon_dict['UAC'] + codon_dict['UAU']
 
-print(aa_dict[Tyrosine])
+max_amino_acid = max(aa_dict, key=aa_dict.get)
+print('The most frequent amino acid is',max_amino_acid)
