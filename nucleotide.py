@@ -5,13 +5,16 @@
 #AUG UUG GUG起始
 #UAA UAG UGA终止
 
+bases='ACGU'
+codon_list=[a+b+c for a in bases for b in bases for c in bases]
+
 gene_sequence='AUGUAUUAUUAUUAUACUACUUCAAUCUCGUCGUAGUAGCGUCGUUAGUAGUAUUAUUAUUAUUAAACUACUACUACUACUACU'
 terminal=['UAA','UAG','UGA']
 codon_dict={}
+codon_dict.setdefault(codon_list,0) #ERROR: Unhashable type: 'list' (Lists cannot be used as keys)
 i=0
 while i>=0:
     codon=gene_sequence[3*i:3*i+3] 
-    codon_dict.setdefault(codon, 0) #add the codon into the dictionary and set the value as 0 when the codon firstly appears
     codon_dict[codon]+=1 
     i+=1
     if codon in terminal:
