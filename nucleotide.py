@@ -23,23 +23,24 @@ else:
     def frequent_codon(RNA_sequence,silent=False):    
         terminal=['UAA','UAG','UGA']
         codon_dict={}
-        for codons in codon_list:
+        for codons in codon_list: # create condons index in dict and set defalt value
             codon_dict.setdefault(codons,0) 
         i=0
-        while i>=0:
+        while i>=0: # count condons
             codon=RNA_sequence[3*i:3*i+3] 
             codon_dict[codon]+=1 
             i+=1
-            if codon in terminal:
+            if codon in terminal: #if meet terminal condon, exit 
                 break
         max_codon=max(codon_dict, key=codon_dict.get)
-        if not silent:
+        if not silent: # if not scilence, output
             print('The most frequent codon in this sequence is',max_codon)
         return(codon_dict)
 
     def frequent_amino_acids(RNA_sequence,silent=False):
-        codon_dict=frequent_codon(RNA_sequence,silent=True)
+        codon_dict=frequent_codon(RNA_sequence,silent=True) # get condon dict
         aa_dict={}
+        #count frequency
         aa_dict['Alanine']=codon_dict['GCG']+codon_dict['GCA']+codon_dict['GCC']+codon_dict['GCU']
         aa_dict['Cysteine']=codon_dict['UGC']+codon_dict['UGU']
         aa_dict['Aspartic']=codon_dict['GAC']+codon_dict['GAU']
@@ -61,12 +62,12 @@ else:
         aa_dict['Tryptophan'] = codon_dict['UGG']
         aa_dict['Tyrosine'] = codon_dict['UAC'] + codon_dict['UAU']
 
-        max_amino_acid=max(aa_dict, key=aa_dict.get)
+        max_amino_acid=max(aa_dict, key=aa_dict.get) #get most frequent amino acid
         if not silent:
             print('The most frequent amino acid is',max_amino_acid)
         return(aa_dict)
 
-    def aminoacids_piechart(RNA_sequence):
+    def aminoacids_piechart(RNA_sequence): #generate pie chart
         aa_dict=frequent_amino_acids(RNA_sequence,silent=True)
         labels=aa_dict.keys()
         values=aa_dict.values()
