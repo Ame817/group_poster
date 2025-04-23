@@ -35,10 +35,10 @@ else:
         max_codon=max(codon_dict, key=codon_dict.get)
         if not silent:
             print('The most frequent codon in this sequence is',max_codon)
-        return(max_codon,codon_dict)
+        return(codon_dict)
 
     def frequent_amino_acids(RNA_sequence,silent=False):
-        _,codon_dict=frequent_codon(RNA_sequence,silent=True)
+        codon_dict=frequent_codon(RNA_sequence,silent=True)
         aa_dict={}
         aa_dict['Alanine']=codon_dict['GCG']+codon_dict['GCA']+codon_dict['GCC']+codon_dict['GCU']
         aa_dict['Cysteine']=codon_dict['UGC']+codon_dict['UGU']
@@ -64,10 +64,10 @@ else:
         max_amino_acid=max(aa_dict, key=aa_dict.get)
         if not silent:
             print('The most frequent amino acid is',max_amino_acid)
-        return(max_amino_acid,aa_dict)
+        return(aa_dict)
 
     def aminoacids_piechart(RNA_sequence):
-        _,aa_dict=frequent_amino_acids(RNA_sequence,silent=True)
+        aa_dict=frequent_amino_acids(RNA_sequence,silent=True)
         labels=aa_dict.keys()
         values=aa_dict.values()
 
@@ -78,6 +78,7 @@ else:
         plt.figure(figsize=(8, 8))  
         plt.pie(values, labels=labels,autopct='%1.1f%%', startangle=140, colors=colors,explode=explode)
         plt.axis('equal')
+        plt.title('The frequency of amino acids')
 
         plt.show()
 

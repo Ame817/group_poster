@@ -13,10 +13,14 @@ Functions added:
    1.frequent_codon
       find the most frequent codon
       This function returns both 'most frequent codon' & {a dictionary containing the number of times each codon appears}
-      Only print the most frequent codon. The dictionaty is used in the next function
+      Only print the most frequent codon. The dictionary is used in the next function
    2.frequent_amino_acids
       find the most frequent amino acid
       This function returns both 'most frequent amino acid' & {a dictionary containing the number of times each amino acid appears}
-      Only print the most frequent amino acid. The dictionaty is used in the next function
+      Only print the most frequent amino acid. The dictionary is used in the next function
    3.aminoacids_piechart
       visualize the frequencies
+
+2025-04-23 ZRZ:
+   Modified the functions.
+   Function 1 & 2 only return the dictionaries. The most frequent codon/amino acid is printed.
