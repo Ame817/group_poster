@@ -67,20 +67,20 @@ else:
             print('The most frequent amino acid is',max_amino_acid)
         return(aa_dict)
 
-    def aminoacids_piechart(RNA_sequence): #generate pie chart
-        aa_dict=frequent_amino_acids(RNA_sequence,silent=True)
-        labels=aa_dict.keys()
-        values=aa_dict.values()
-
-        cmap = plt.get_cmap('cool')
-        colors=[cmap(i / len(values)) for i in range(len(values))]
-        explode=[0.05]*len(values)
-
+    def aminoacids_piechart(RNA_sequence): #generate pie chart, in decsending order.
+        aa_dict = frequent_amino_acids(RNA_sequence, silent=True)
+        labels = list(aa_dict.keys())
+        values = list(aa_dict.values())
+        sort_list = sorted(zip(labels, values), key=lambda x: x[1], reverse=False) # sort value in descending order
+        sorted_labels, sorted_values = zip(*sort_list)
+        cmap = plt.get_cmap('coolwarm') # set color in red to blue
+        colors = [cmap(j / len(sorted_values)) for j in range(len(sorted_values))]
+        explode = [0.05] * len(sorted_values)
+    
         plt.figure(figsize=(8, 8))  
-        plt.pie(values, labels=labels,autopct='%1.1f%%', startangle=140, colors=colors,explode=explode)
+        plt.pie(sorted_values, labels=sorted_labels,autopct='%1.1f%%', startangle=140, colors=colors,explode=explode)
         plt.axis('equal')
         plt.title('The frequency of amino acids')
-
         plt.show()
 
 frequent_codon(RNA_sequence)

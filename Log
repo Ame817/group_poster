@@ -29,3 +29,5 @@ Functions added:
    update mRNA check function, I think if mRNA is wrong, we shoud exit
    add lineplot and it shows average of CG propotion
    add comments for nucleotide.py === Add some comments!==
+   
+   make piechart in descending order
