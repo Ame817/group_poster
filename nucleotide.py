@@ -78,7 +78,7 @@ else:
         explode = [0.05] * len(sorted_values)
     
         plt.figure(figsize=(8, 8))  
-        plt.pie(sorted_values, labels=sorted_labels,autopct='%1.1f%%', startangle=140, colors=colors,explode=explode)
+        plt.pie(sorted_values, labels=sorted_labels,autopct=lambda x:  f'{x:.1f}%' if x>5 else '' , startangle=140, colors=colors,explode=explode)
         plt.axis('equal')
         plt.title('The frequency of amino acids')
         plt.show()

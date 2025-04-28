@@ -12,24 +12,25 @@ import numpy as np
 # read or input
 mRNA='ACGAUCGAUCGCCCCCUGAUCGAUGGGGGGGGGGGGAUCGUAGCUACGUAGUAGUGUGUGUAGCUAGCUAGCAGCGAGCAACACAACGUUUUGUACAGUCGUAGUGUAGCUAGCUGUGUACUAGUCGAUGUGAUCGAUGCAUCGAUCGACUG'
 # check mRNA, if not exit and report error
-
 RNA_check=re.findall('[^AUCG]',mRNA)
 if RNA_check:
     print('ERROR:This is not a RNA sequence')
     exit()
 
 # change into cDNA
-def cDNA(mRNA):
-    mRNA=re.sub('U','T',mRNA)
-    return mRNA
+def cDNA_turn(mRNA):
+    cDNA=re.sub('U','T',mRNA)
+    return cDNA
+
+cDNA=cDNA_turn(mRNA)
 
 ws=50
 
 # moving average
 temL=[]
 Results=[]
-for i in range(0,len(mRNA)-ws):
-    temL=mRNA[i:i+ws]
+for i in range(0,len(cDNA)-ws):
+    temL=cDNA[i:i+ws]
     temF=re.findall(r'[CG]',temL)
     temR=len(temF)
     Results.append(temR)
