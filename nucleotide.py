@@ -73,12 +73,14 @@ else:
         values = list(aa_dict.values())
         sort_list = sorted(zip(labels, values), key=lambda x: x[1], reverse=False) # sort value in descending order
         sorted_labels, sorted_values = zip(*sort_list)
+        sorted_labels=list(sorted_labels)
+        sorted_labels[:-3]=[''] * (len(sorted_labels)-3)
         cmap = plt.get_cmap('coolwarm') # set color in red to blue
         colors = [cmap(j / len(sorted_values)) for j in range(len(sorted_values))]
         explode = [0.05] * len(sorted_values)
     
-        plt.figure(figsize=(8, 8))  
-        plt.pie(sorted_values, labels=sorted_labels,autopct=lambda x:  f'{x:.1f}%' if x>5 else '' , startangle=140, colors=colors,explode=explode)
+        plt.figure(figsize=(10, 10))  
+        plt.pie(sorted_values, labels=sorted_labels,autopct=lambda x:  f'{x:.1f}%' if x>5 else '' , startangle=30, colors=colors,explode=explode,textprops={'fontsize': 17})
         plt.axis('equal')
         plt.title('The frequency of amino acids')
         plt.show()
