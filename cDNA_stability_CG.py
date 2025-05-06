@@ -1,8 +1,11 @@
 # check mRNA
 # change mRNA -> cDNA:
 #      find U and change into T
-# measure CG propotion : moving average ,window size:100?
-#    store information (series1)
+# 设置窗口大小：50
+# measure CG propotion : 
+#     从第一个开始：计算【1到50】50个base中CG的百分比
+#     将窗口向右滑动一个base，计算从【2到51】50个base中CG的百分比
+#     以此类推，一直往右边推，推到最右边为止
 # visualize CG propotion trend use heatmap
 
 import matplotlib.pyplot as plt
@@ -27,31 +30,21 @@ cDNA=cDNA_turn(mRNA)
 ws=50
 
 # moving average
-temL=[]
-Results=[]
-for i in range(0,len(cDNA)-ws):
-    temL=cDNA[i:i+ws]
+temL=[]     #临时存放50个base的列表
+Results=[]  #存放结果的list
+for i in range(0,len(cDNA)-ws): # 从第一个开始，一直往右边推
+    temL=cDNA[i:i+ws]  
     temF=re.findall(r'[CG]',temL)
     temR=len(temF)
-    Results.append(temR)
+    Results.append(temR) #记录多少个CG
     temL,temR='',0
-
-meanvalue=sum(Results)/len(Results)
+Results=[t/ws for t in Results] #把CG换算成比例
 #show heat map
-data=np.array([Results])
+data=np.array([Results]) 
 plt.figure(figsize=(15, 3))  
-sns.heatmap(data, cmap='coolwarm', vmin=0, vmax=ws, cbar_kws={'label': 'CG Content (%)'})
+sns.heatmap(data, cmap='coolwarm', vmin=0, vmax=1, cbar_kws={'label': 'CG Content (%)'})
 plt.title('CG Proportion Along cDNA Sequence (Sliding Window='+str(ws)+'bp)')
 plt.xlabel('Window Position')
 plt.yticks([]) 
 plt.show()
 
-
-# show line map
-plt.figure(figsize=(10, 6))
-sns.lineplot(data=Results)
-plt.axhline(y=meanvalue, color='red', linestyle='--', label='Mean')
-plt.title("CG Proportion Along cDNA")
-plt.xlabel("position")
-plt.ylabel("CG proportion")
-plt.show()
